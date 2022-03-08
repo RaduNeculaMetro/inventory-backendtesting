@@ -1,17 +1,21 @@
 package steps.authorization;
 
-import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.RequestSpecification;
 import model.AccessTokenResponse;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import org.apache.http.HttpStatus;
+import utils.EnvProperties;
 import utils.EnvironmentProperties;
-
+import utils.api.WaitUtils;
 
 
 public class IdamAuthorizationSteps {
 
     private AccessTokenResponse token;
+
+    private ValidatableResponse response;
 
     @Steps
     private EnvironmentProperties environmentProperties;
@@ -23,12 +27,16 @@ public class IdamAuthorizationSteps {
         return token;
     }
 
-    @Step
     public void getAccessToken () {
-        Response response = idamAuthorizationApiSteps.post();
-        response.then().assertThat().statusCode(HttpStatus.SC_OK);
-        String access_token = response.jsonPath().get("access_token");
-        this.token = new AccessTokenResponse().setAccess_token(access_token);
+        WaitUtils.verifyAndRetry(()->
+       this.response =  idamAuthorizationApiSteps.tokenPost().then().statusCode(HttpStatus.SC_OK)
+        ,5,1000 );
+        saveAccessToken(response);
+    }
+
+    public void saveAccessToken (ValidatableResponse response) {
+         String access_token = response.extract().jsonPath().get("access_token");
+         this.token = new AccessTokenResponse().setAccess_token(access_token);
     }
 
 }

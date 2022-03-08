@@ -32,4 +32,8 @@ public class EnvProperties {
     public String getInventoryGatewayUri () {
         return environmentProperties.getProperty("inventoryGateway.path.uri");
     }
+
+    public String getAdminResetCacheUri () {
+        return environmentProperties.getProperty("adminResetCache.path.uri");
+    }
 }

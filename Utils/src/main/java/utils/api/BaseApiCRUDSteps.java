@@ -1,7 +1,6 @@
 package utils.api;
 
 import io.restassured.response.Response;
-import net.thucydides.core.annotations.Step;
 import utils.EnvProperties;
 import utils.LoggerUtils;
 
@@ -17,13 +16,16 @@ public class BaseApiCRUDSteps extends BaseSteps{
         this.baseURLwithId = baseURL + "{/id}";
     }
 
-    @Step
-    public Response post () {
-        return logResponse(prepare()
-                .post(baseURL));
-        }
+//    public Response post () {
+//        return prepare()
+//                .post(baseURL);
+//        }
 
-    @Step
+    public Response post () {
+        return startRequest()
+                .post(baseURL);
+    }
+
     private Response logResponse (Response response) {
         LoggerUtils.doOnLogResponse( () -> response.then().log().all());
         return response;

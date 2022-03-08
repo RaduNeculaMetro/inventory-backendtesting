@@ -29,30 +29,15 @@ public abstract class BaseSteps {
 
     }
 
+    @Step
     protected RequestSpecification startRequest () {
         RestAssured.config = config()
                 .encoderConfig(EncoderConfig.encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false));
-        RequestSpecification given = SerenityRest.given();
+        RequestSpecification given = RestAssured.given();
         LoggerUtils.doOnLogRequest(() -> given.log().all());
         String baseUri = baseUriFunction.apply(envProperties);
         given.baseUri(baseUri);
         return given;
     }
 
-    @Step
-    protected  RequestSpecification prepare () {
-        return startRequest()
-                .with()
-                .auth()
-                .preemptive()
-                .basic(envProperties.getbasicUsername(),envProperties.getbasicPassword())
-                .contentType("application/x-www-form-urlencoded; charset=utf-8")
-                .formParam("grant_type", "password")
-                .formParam("username", envProperties.getPPUsername())
-                .formParam("password", envProperties.getPPUserPassword())
-                .formParam("client_id", "MSTORE")
-                .formParam("realm_id", "MSTORE_RL")
-                .formParam("user_type", "EMP")
-                .when();
-    }
 }

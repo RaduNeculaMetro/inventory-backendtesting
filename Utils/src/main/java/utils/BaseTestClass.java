@@ -17,4 +17,5 @@ public class BaseTestClass {
         RestAssured.useRelaxedHTTPSValidation();
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
+
 }
