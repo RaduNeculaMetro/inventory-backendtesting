@@ -16,11 +16,6 @@ public class BaseApiCRUDSteps extends BaseSteps{
         this.baseURLwithId = baseURL + "{/id}";
     }
 
-//    public Response post () {
-//        return prepare()
-//                .post(baseURL);
-//        }
-
     public Response post () {
         return startRequest()
                 .post(baseURL);

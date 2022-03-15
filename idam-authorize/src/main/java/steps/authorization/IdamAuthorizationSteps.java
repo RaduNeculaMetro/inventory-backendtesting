@@ -1,12 +1,9 @@
 package steps.authorization;
 
 import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
 import model.AccessTokenResponse;
-import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import org.apache.http.HttpStatus;
-import utils.EnvProperties;
 import utils.EnvironmentProperties;
 import utils.api.WaitUtils;
 

@@ -1,0 +1,52 @@
+[
+  {
+    "departmentNumber": 52,
+    "departmentDescription": "PROCESSED MEAT",
+    "departmentNumberDepartmentDescription": "52-PROCESSED MEAT"
+  },
+  {
+    "departmentNumber": 53,
+    "departmentDescription": "FRUITS AND VEGETABLES",
+    "departmentNumberDepartmentDescription": "53-FRUITS AND VEGETABLES"
+  },
+  {
+    "departmentNumber": 54,
+    "departmentDescription": "FISH",
+    "departmentNumberDepartmentDescription": "54-FISH"
+  },
+  {
+    "departmentNumber": 58,
+    "departmentDescription": "Frozen Fish",
+    "departmentNumberDepartmentDescription": "58-Frozen Fish"
+  },
+  {
+    "departmentNumber": 63,
+    "departmentDescription": "WINE",
+    "departmentNumberDepartmentDescription": "63-WINE"
+  },
+  {
+    "departmentNumber": 64,
+    "departmentDescription": "CANNED FOOD",
+    "departmentNumberDepartmentDescription": "64-CANNED FOOD"
+  },
+  {
+    "departmentNumber": 67,
+    "departmentDescription": "COSMETICS",
+    "departmentNumberDepartmentDescription": "67-COSMETICS"
+  },
+  {
+    "departmentNumber": 80,
+    "departmentDescription": "OTHERS",
+    "departmentNumberDepartmentDescription": "80-OTHERS"
+  },
+  {
+    "departmentNumber": 421,
+    "departmentDescription": "BBQ AND CHARCOAL",
+    "departmentNumberDepartmentDescription": "421-BBQ AND CHARCOAL"
+  },
+  {
+    "departmentNumber": 481,
+    "departmentDescription": "WORKWEAR",
+    "departmentNumberDepartmentDescription": "481-WORKWEAR"
+  }
+]

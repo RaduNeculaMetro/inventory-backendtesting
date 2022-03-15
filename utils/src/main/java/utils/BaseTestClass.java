@@ -5,11 +5,15 @@ import io.restassured.config.ObjectMapperConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.mapper.ObjectMapperType;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 @RunWith(SerenityRunner.class)
 public class BaseTestClass {
+
+    @Steps
+    private EnvProperties envProperties;
 
     @BeforeClass
     public static void before () {
@@ -17,5 +21,4 @@ public class BaseTestClass {
         RestAssured.useRelaxedHTTPSValidation();
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
-
 }

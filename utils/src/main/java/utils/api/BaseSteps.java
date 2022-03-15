@@ -2,9 +2,7 @@ package utils.api;
 
 import io.restassured.RestAssured;
 import io.restassured.config.EncoderConfig;
-import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import utils.EnvProperties;
@@ -26,7 +24,6 @@ public abstract class BaseSteps {
     }
     public EnvProperties getEnvProperties () {
         return envProperties;
-
     }
 
     @Step
