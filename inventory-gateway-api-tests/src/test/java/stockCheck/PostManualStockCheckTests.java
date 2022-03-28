@@ -24,6 +24,7 @@ public class PostManualStockCheckTests extends BaseTestClass {
     }
 
     //TODO enable manual stock check in test environment to properly create automated tests
+    //create
     @Test
     public void postStockCheck() {
         Response response =
@@ -32,7 +33,7 @@ public class PostManualStockCheckTests extends BaseTestClass {
                 "36",
                 idamAuthorizationSteps.getToken().getAccess_token(),
                 25054, 1,1,
-                "2022-03-11", "null");
+                "2022-03-11", "test");
         response.then().assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
         String body = response.jsonPath().getString("debugMessage");
         assert body.contains("Manual stock check is disabled for requested country");

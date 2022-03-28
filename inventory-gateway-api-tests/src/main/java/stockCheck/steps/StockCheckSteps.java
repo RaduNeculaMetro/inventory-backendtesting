@@ -1,12 +1,12 @@
 package stockCheck.steps;
 
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import stockCheck.model.*;
 import utils.LoggerUtils;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -148,6 +148,7 @@ public class StockCheckSteps {
     public Response postStockCheckSimilarArticles(String countryCode, String salesLine,
                                                   String storeNumber, String token) {
         return logResponse(stockCheckApiSteps.authorizedGiven(token)
+                .contentType(ContentType.JSON)
                 .body(preparePostSimilarArticlesModel())
                 .when()
                 .post(STOCK_CHECK_SIMILAR_ARTICLES_ENDPOINT, countryCode, salesLine, storeNumber));
@@ -207,13 +208,12 @@ public class StockCheckSteps {
     private StockCheckReasonsModel.StockCheckReasonsModelRequest prepareStockCheckReasonsModel() {
     StockCheckReasonsModel.StockCheckReasonsModelRequest request =
             new StockCheckReasonsModel.StockCheckReasonsModelRequest();
-    request .setChangeDate("2021-01-11")
+    request .setChangeDate("2022-03-16T08:19:43.676Z")
             .setChangeUser("admin")
             .setCountryCode("RO")
             .setReasonText("MAINTENANCE")
             .setCreationUser("altAdmin")
-            .setChangeDate("2022-01-10")
-            .setCreationDate("2022-01-01")
+            .setCreationDate("2021-03-16T08:19:43.676Z")
             .setId("7")
             .setLanguage("RO")
             .setOrderNo(1)

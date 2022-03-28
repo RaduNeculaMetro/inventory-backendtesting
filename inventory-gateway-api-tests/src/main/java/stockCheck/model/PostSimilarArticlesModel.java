@@ -21,7 +21,7 @@ public class PostSimilarArticlesModel {
 
     }
 
-    @Getter
+@Getter
 @Setter
     public static class ArticleId
     {

@@ -1,22 +1,18 @@
 package stockCheck;
 
 import io.restassured.response.Response;
-import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Steps;
 import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
-import org.skyscreamer.jsonassert.JSONCompareMode;
 import steps.authorization.IdamAuthorizationSteps;
 import stockCheck.steps.StockCheckSteps;
 import utils.BaseTestClass;
-import org.skyscreamer.jsonassert.JSONAssert;
-import utils.FileReaderUtils;
 
 import java.util.Collections;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 public class GetStockCheckDepartmentsTests extends BaseTestClass {
 
@@ -34,13 +30,14 @@ public class GetStockCheckDepartmentsTests extends BaseTestClass {
 
     @Test
     public void getStockCheckDepartments() throws JSONException {
-    System.out.println(Serenity.sessionVariableCalled("idamToken") + " !!!!!!!!!!!!!!!!!1" );
         //WHEN
         Response response = stockCheckSteps.getStockChecksByDepartments("RO", "MCC", "36", idamAuthorizationSteps.getToken().getAccess_token());
 
         //THEN
         response.then().assertThat().statusCode(HttpStatus.SC_OK);
-        JSONAssert.assertEquals(FileReaderUtils.read("stockDepartments.json"), response.getBody().asString(), JSONCompareMode.STRICT);
+        response.then().body("[0]", allOf(hasKey("departmentNumber")));
+        response.then().body("[0]", allOf(hasKey("departmentDescription")));
+        response.then().body("[0]", allOf(hasKey("departmentNumberDepartmentDescription")));
     }
 
     @Test
@@ -68,9 +65,12 @@ public class GetStockCheckDepartmentsTests extends BaseTestClass {
     public void getStockCheckDepartmentsWrongStoreNumber() {
 
         //WHEN
-        Response response = stockCheckSteps.getStockChecksByDepartments("RO", "MCC", "10", idamAuthorizationSteps.getToken().getAccess_token());
+        Response response = stockCheckSteps.getStockChecksByDepartments("RO", "MCC", "99999", idamAuthorizationSteps.getToken().getAccess_token());
 
         //THEN
-        response.then().assertThat().statusCode(HttpStatus.SC_FORBIDDEN);
+        response.then().assertThat().statusCode(HttpStatus.SC_OK);
+        response.then().body("[0]", allOf(hasKey("departmentNumber")));
+        response.then().body("[0]", allOf(hasKey("departmentDescription")));
+        response.then().body("[0]", allOf(hasKey("departmentNumberDepartmentDescription")));
     }
 }

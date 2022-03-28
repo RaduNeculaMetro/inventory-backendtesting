@@ -64,4 +64,18 @@ public class StockCheckAsserter {
         response.then().body("stockCheckListViews[0]", allOf(hasKey("stockCheckReason")));
     }
 
+    public void assertStockCheckReasons(Response response) {
+        response.then().body("[0]", allOf(hasKey("id")));
+        response.then().body("[0]", allOf(hasKey("countryCode")));
+        response.then().body("[0]", allOf(hasKey("language")));
+        response.then().body("[0]", allOf(hasKey("reasonText")));
+        response.then().body("[0]", allOf(hasKey("creationDate")));
+        response.then().body("[0]", allOf(hasKey("changeUser")));
+        response.then().body("[0]", allOf(hasKey("changeDate")));
+        response.then().body("[0]", allOf(hasKey("orderNo")));
+        response.then().body("[0]", allOf(hasKey("defaults")));
+        response.then().body("[0].defaults[0]", allOf(hasKey("stockCorrectionCode")));
+        response.then().body("[0].defaults[0]", allOf(hasKey("applyFor")));
+    }
+
 }

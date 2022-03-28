@@ -1,7 +1,5 @@
 package stockCheck.model;
 
-import java.time.LocalDateTime;
-
 public class PostStockCheckModel {
   ArticleId articleId;
   private Integer stockCheckCause;

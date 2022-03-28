@@ -34,7 +34,7 @@ public class GetStockCheckTypeTests extends BaseTestClass {
 
        //THEN
         response.then().assertThat().statusCode(HttpStatus.SC_OK);
-        response.then().body("$", contains("MinusStock", "OneTwoStock"));
+        response.then().body("$", containsInAnyOrder("MinusStock", "OneTwoStock", "ManualStockCheck"));
     }
 
     @Test
@@ -62,9 +62,10 @@ public class GetStockCheckTypeTests extends BaseTestClass {
     public void getStockCheckTypeWrongStoreNumber() {
 
         //WHEN
-        Response response = stockCheckSteps.getStockCheckType("RO", "MCC", "10", idamAuthorizationSteps.getToken().getAccess_token());
+        Response response = stockCheckSteps.getStockCheckType("RO", "MCC", "999", idamAuthorizationSteps.getToken().getAccess_token());
 
         //THEN
-        response.then().assertThat().statusCode(HttpStatus.SC_FORBIDDEN);
+        response.then().assertThat().statusCode(HttpStatus.SC_OK);
+        response.then().body("$", containsInAnyOrder("MinusStock", "OneTwoStock", "ManualStockCheck"));
     }
 }

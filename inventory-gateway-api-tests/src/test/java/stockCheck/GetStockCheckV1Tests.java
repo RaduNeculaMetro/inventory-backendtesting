@@ -40,7 +40,9 @@ public class GetStockCheckV1Tests extends BaseTestClass {
 
         //THEN
         response.then().assertThat().statusCode(HttpStatus.SC_OK);
-        stockCheckAsserter.assertStockCheckChecked(response);
+        response.then().body("numberOfArticles", is(0));
+        response.then().body("stockCheckListViews", is(Collections.EMPTY_LIST));
+    //    stockCheckAsserter.assertStockCheckChecked(response);
     }
 
     @Test
@@ -63,6 +65,8 @@ public class GetStockCheckV1Tests extends BaseTestClass {
 
         //THEN
         response.then().assertThat().statusCode(HttpStatus.SC_OK);
-        stockCheckAsserter.assertStockCheckChecked(response);
+        response.then().body("numberOfArticles", is(0));
+        response.then().body("stockCheckListViews", is(Collections.EMPTY_LIST));
+    //    stockCheckAsserter.assertStockCheckChecked(response);
     }
 }

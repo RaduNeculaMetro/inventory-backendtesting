@@ -6,6 +6,7 @@ import org.apache.http.HttpStatus;
 import org.junit.Before;
 import org.junit.Test;
 import steps.authorization.IdamAuthorizationSteps;
+import stockCheck.steps.StockCheckAsserter;
 import stockCheck.steps.StockCheckSteps;
 import utils.BaseTestClass;
 
@@ -20,6 +21,9 @@ public class GetStockCheckReasonsTests extends BaseTestClass {
 
     @Steps
     private IdamAuthorizationSteps idamAuthorizationSteps;
+
+    @Steps
+    private StockCheckAsserter stockCheckAsserter;
 
     @Before
     public void getToken() {
@@ -36,7 +40,7 @@ public class GetStockCheckReasonsTests extends BaseTestClass {
 
         //THEN
         response.then().assertThat().statusCode(HttpStatus.SC_OK);
-        response.then().body("$", is(Collections.EMPTY_LIST));
+        stockCheckAsserter.assertStockCheckReasons(response);
     }
 
     @Test
@@ -55,7 +59,7 @@ public class GetStockCheckReasonsTests extends BaseTestClass {
 
         //WHEN
         Response response =
-                stockCheckSteps.getStockCheckReasons("RO", "MCC", "POV", idamAuthorizationSteps.getToken().getAccess_token());
+                stockCheckSteps.getStockCheckReasons("RO", "MCC", "EN", idamAuthorizationSteps.getToken().getAccess_token());
 
         //THEN
         response.then().assertThat().statusCode(HttpStatus.SC_OK);

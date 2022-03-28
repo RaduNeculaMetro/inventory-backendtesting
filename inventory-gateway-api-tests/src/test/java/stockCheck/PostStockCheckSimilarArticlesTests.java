@@ -8,7 +8,7 @@ import org.junit.Test;
 import steps.authorization.IdamAuthorizationSteps;
 import stockCheck.steps.StockCheckSteps;
 import utils.BaseTestClass;
-
+import static org.hamcrest.Matchers.*;
 
 public class PostStockCheckSimilarArticlesTests extends BaseTestClass {
 
@@ -52,9 +52,10 @@ public class PostStockCheckSimilarArticlesTests extends BaseTestClass {
     @Test
     public void postStockCheckSimilarArticlesWrongStoreNumber() {
         Response response =
-                stockCheckSteps.postStockCheckSimilarArticles("RO","MCC","90", idamAuthorizationSteps.getToken().getAccess_token());
+                stockCheckSteps.postStockCheckSimilarArticles("RO","MCC","999", idamAuthorizationSteps.getToken().getAccess_token());
 
-        response.then().assertThat().statusCode(HttpStatus.SC_FORBIDDEN);
+        response.then().log().all();
+        response.then().assertThat().statusCode(HttpStatus.SC_OK);
     }
 
 }

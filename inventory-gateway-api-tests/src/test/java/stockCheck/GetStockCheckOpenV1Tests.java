@@ -66,10 +66,12 @@ public class GetStockCheckOpenV1Tests extends BaseTestClass {
     public void getStockCheckOpenV1WrongStoreNumber() {
         //WHEN
         Response response =
-                stockCheckSteps.getStockCheckOpenV1("RO", "MCC", "99","RO", idamAuthorizationSteps.getToken().getAccess_token());
+                stockCheckSteps.getStockCheckOpenV1("RO", "MCC", "999","RO", idamAuthorizationSteps.getToken().getAccess_token());
 
         //THEN
-        response.then().assertThat().statusCode(HttpStatus.SC_FORBIDDEN);
+        response.then().assertThat().statusCode(HttpStatus.SC_OK);
+        response.then().body("numberOfArticles", is(0));
+        response.then().body("stockCheckListViews", is(Collections.EMPTY_LIST));
     }
     @Test
     public void getStockCheckOpenV1WrongLanguageCode() {

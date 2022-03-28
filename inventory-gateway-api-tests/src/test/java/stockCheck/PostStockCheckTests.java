@@ -4,13 +4,13 @@ import io.restassured.response.Response;
 import net.thucydides.core.annotations.Steps;
 import org.apache.http.HttpStatus;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import steps.authorization.IdamAuthorizationSteps;
 import stockCheck.steps.StockCheckSteps;
 import utils.BaseTestClass;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.Month;
 
 public class PostStockCheckTests extends BaseTestClass {
 
@@ -27,18 +27,17 @@ public class PostStockCheckTests extends BaseTestClass {
     }
 
     //TODO get more info why we receive bad request but no details
-    @Ignore
+ //   @Ignore
     @Test
     public void postStockCheck() {
-        LocalDateTime local = LocalDateTime.now();
         Response response =
         stockCheckSteps.postStockCheck("RO",
                 "MCC",
                 "36",
                 idamAuthorizationSteps.getToken().getAccess_token(),
                 25054, 1,1,
-                 local.toLocalTime().toString(), 1,
-                1, "Admin");
+                 "2022-03-15", 1,
+                3, "Admin");
 
         response.then().log().all();
         response.then().assertThat().statusCode(HttpStatus.SC_OK);

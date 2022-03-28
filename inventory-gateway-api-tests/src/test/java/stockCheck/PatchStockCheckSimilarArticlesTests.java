@@ -53,9 +53,11 @@ public class PatchStockCheckSimilarArticlesTests extends BaseTestClass {
     @Test
     public void patchStockCheckSimilarArticlesBadStoreNumber() {
         Response response =
-                stockCheckSteps.patchStockCheckSimilarArticles("RO","MCC","99", idamAuthorizationSteps.getToken().getAccess_token());
+                stockCheckSteps.patchStockCheckSimilarArticles("RO","MCC","999", idamAuthorizationSteps.getToken().getAccess_token());
 
-        response.then().assertThat().statusCode(HttpStatus.SC_FORBIDDEN);
+        response.then().assertThat().statusCode(HttpStatus.SC_OK);
+        String body = response.asString();
+        assert body.equals("0 record(s) updated");
     }
 
     @Test

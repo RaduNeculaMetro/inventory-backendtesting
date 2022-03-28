@@ -2,6 +2,7 @@ package utils.api;
 
 import io.restassured.RestAssured;
 import io.restassured.config.EncoderConfig;
+import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
@@ -37,4 +38,10 @@ public abstract class BaseSteps {
         return given;
     }
 
+    @Step
+    public RequestSpecification authorizedGiven (String accessToken) {
+        return startRequest()
+                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer " + accessToken );
+    }
 }
